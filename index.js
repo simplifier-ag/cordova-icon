@@ -272,6 +272,9 @@ var generateIconsForPlatform = function (platform) {
   icons.forEach(function (icon) {
     all.push(generateIcon(platform, icon));
   });
+  if(platform.name === 'ios') {
+    fs.copySync(__dirname + '/Contents.json',platform.iconsPath + '/Contents.json');
+  }
   return Promise.all(all);
 };
 
