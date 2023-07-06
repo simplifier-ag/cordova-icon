@@ -85,19 +85,7 @@ var getPlatforms = function (projectName) {
       { name : 'mipmap-mdpi/icon.png',  size : 48 },
       { name : 'mipmap-xhdpi/icon.png', size : 96 },
       { name : 'mipmap-xxhdpi/icon.png', size : 144 },
-      { name : 'mipmap-xxxhdpi/icon.png', size : 192 },
-      { name : 'mipmap-hdpi/ic_launcher.png',  size : 72 },
-      { name : 'mipmap-ldpi/ic_launcher.png',  size : 36 },
-      { name : 'mipmap-mdpi/ic_launcher.png',  size : 48 },
-      { name : 'mipmap-xhdpi/ic_launcher.png', size : 96 },
-      { name : 'mipmap-xxhdpi/ic_launcher.png', size : 144 },
-      { name : 'mipmap-xxxhdpi/ic_launcher.png', size : 192 },
-      { name : 'mipmap-hdpi-v26/ic_launcher_foreground.png',  size : 72 },
-      { name : 'mipmap-ldpi-v26/ic_launcher_foreground.png',  size : 36 },
-      { name : 'mipmap-mdpi-v26/ic_launcher_foreground.png',  size : 48 },
-      { name : 'mipmap-xhdpi-v26/ic_launcher_foreground.png', size : 96 },
-      { name : 'mipmap-xxhdpi-v26/ic_launcher_foreground.png', size : 144 },
-      { name : 'mipmap-xxxhdpi-v26/ic_launcher_foreground.png', size : 192 }
+      { name : 'mipmap-xxxhdpi/icon.png', size : 192 }
     ]
   });
   platforms.push({
@@ -306,9 +294,11 @@ var generateIcons = function (platforms) {
     });
     all.push(sequence);
   });
-  Q.all(all).then(function () {
-    deferred.resolve();
-  });
+  
+  Q.all(all)
+  .then(deferred.resolve)
+  .catch(deferred.reject);
+
   return deferred.promise;
 };
 
