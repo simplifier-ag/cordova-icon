@@ -225,17 +225,17 @@ var generateIcon = function (platform, icon) {
     fs.mkdirsSync(dst);
   }
 
-  gm(srcPath)
+  var img = gm(srcPath)
   .resizeExact(icon.size, icon.size)
   .alpha('Off')
   .quality(100);
 
   if (icon.height) {
 	
-	gm.crop(icon.size, icon.height, Math.round(icon.width/2), Math.round(icon.height));
+	img.crop(icon.size, icon.height, Math.round(icon.width/2), Math.round(icon.height));
   }
 
-  gm.write(dstPath, function (err) {
+  img.write(dstPath, function (err) {
     if (err) {
 		deferred.reject(err);
 	  } else {
