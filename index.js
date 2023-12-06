@@ -5,7 +5,7 @@ const colors = require('colors');
 const _      = require('underscore');
 const Q      = require('q');
 const argv   = require('minimist')(process.argv.slice(2));
-const gm = require('gm');
+const gm = require('gm').subClass({ imageMagick: '7+' });
 
 /**
  * @var {Object} settings - names of the config file and of the icon image
