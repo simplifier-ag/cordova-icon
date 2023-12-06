@@ -1,11 +1,11 @@
-var fs     = require('fs-extra');
-var path   = require('path');
-var xml2js = require('xml2js');
-var ig     = require('imagemagick');
-var colors = require('colors');
-var _      = require('underscore');
-var Q      = require('q');
-var argv   = require('minimist')(process.argv.slice(2));
+const fs     = require('fs-extra');
+const path   = require('path');
+const xml2js = require('xml2js');
+const colors = require('colors');
+const _      = require('underscore');
+const Q      = require('q');
+const argv   = require('minimist')(process.argv.slice(2));
+const gm = require('gm');
 
 /**
  * @var {Object} settings - names of the config file and of the icon image
@@ -224,38 +224,26 @@ var generateIcon = function (platform, icon) {
   if (!fs.existsSync(dst)) {
     fs.mkdirsSync(dst);
   }
-  ig.resize({
-    srcPath: srcPath,
-    dstPath: dstPath,
-    quality: 1,
-    format: 'png',
-    width: icon.size,
-    height: icon.size
-  } , function(err, stdout, stderr){
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve();
-      display.success(icon.name + ' created');
-    }
-  });
+
+  gm(srcPath)
+  .resizeExact(icon.size, icon.size)
+  .alpha('Off')
+  .quality(100);
+
   if (icon.height) {
-    ig.crop({
-      srcPath: srcPath,
-      dstPath: dstPath,
-      quality: 1,
-      format: 'png',
-      width: icon.size,
-      height: icon.height
-    } , function(err, stdout, stderr){
-      if (err) {
-        deferred.reject(err);
-      } else {
-        deferred.resolve();
-        display.success(icon.name + ' cropped');
-      }
-    });
+	
+	gm.crop(icon.size, icon.height, Math.round(icon.width/2), Math.round(icon.height));
   }
+
+  gm.write(dstPath, function (err) {
+    if (err) {
+		deferred.reject(err);
+	  } else {
+		deferred.resolve();
+		display.success(icon.name + ' created');
+	  }
+
+  });
   return deferred.promise;
 };
 
