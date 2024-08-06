@@ -314,7 +314,7 @@ let atLeastOnePlatformFound = function () {
       }
     });
   });
-}
+};
 
 /**
  * Checks if a valid icon file exists
