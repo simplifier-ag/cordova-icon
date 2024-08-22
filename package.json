@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/AlexDisler/cordova-icon.git"
+    "url": "git://github.com/simplifier-ag/cordova-icon.git"
   },
   "keywords": [
     "cordova",
@@ -26,9 +26,9 @@
   "author": "Alex Disler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexDisler/cordova-icon/issues"
+    "url": "https://github.com/simplifier-ag/cordova-icon/issues"
   },
-  "homepage": "https://github.com/AlexDisler/cordova-icon",
+  "homepage": "https://github.com/simplifier-ag/cordova-icon",
   "dependencies": {
     "colors": "^1.4.0",
     "fs-extra": "^11.2.0",
