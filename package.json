@@ -4,8 +4,12 @@
   "description": "Automatic icon resizing for Cordova",
   "main": "index.js",
   "preferGlobal": true,
-  "directories": {
-    "bin": "./bin"
+  "files": [
+    "index.js",
+    "Contents.json"
+  ],
+  "bin": {
+    "cordova-icon": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
