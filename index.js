@@ -178,18 +178,23 @@ const getProjectName = () => {
 	return new Promise((resolve, reject) => {
 		const parser = new xml2js.Parser();
 		fs.readFile(SETTINGS.CONFIG_FILE, (err, data) => {
-			if (err) reject(err);
-			parser.parseString(data, (err, result) => {
-				if (err) reject(err);
-				const projectName = result.widget.name[0];
-				resolve(projectName);
-			});
+			if (err) {
+				reject(err);
+			} else {
+				parser.parseString(data, (err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result.widget.name[0]);
+					}
+				});
+			}
 		});
 	});
 };
 
-const generateIcon = (platform, icon) => {
-	return new Promise((resolve, reject) => {
+const generateIcon = async (platform, icon) => {
+	await new Promise((resolve, reject) => {
 		let srcPath = SETTINGS.ICON_FILE;
 		const platformPath = srcPath.replace(/\.png$/, `-${platform.name}.png`);
 		if (fs.existsSync(platformPath)) {
@@ -205,9 +210,12 @@ const generateIcon = (platform, icon) => {
 			img = img.crop(icon.size, icon.height, Math.round(icon.width / 2), Math.round(icon.height));
 		}
 		img.write(dstPath, (err) => {
-			if (err) reject(err);
-			resolve();
-			display.success(`${icon.name} created`);
+			if (err) {
+				reject(err);
+			} else {
+				resolve();
+				display.success(`${icon.name} created`);
+			}
 		});
 	});
 };
@@ -232,6 +240,7 @@ const generateIcons = async (platforms) => {
 
 const atLeastOnePlatformFound = () => {
 	return getProjectPlatforms().then((platforms) => {
+		display.header('Checking Project & Icon');
 		const activePlatforms = platforms.filter((p) => p.isAdded);
 		if (activePlatforms.length > 0) {
 			display.success(`Platforms found: ${activePlatforms.map((p) => p.name).join(', ')}`);
@@ -270,8 +279,6 @@ const configFileExists = () => {
 		});
 	});
 };
-
-display.header('Checking Project & Icon');
 
 atLeastOnePlatformFound()
 	.then(validIconExists)
