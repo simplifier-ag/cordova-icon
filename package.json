@@ -1,18 +1,22 @@
 {
   "name": "cordova-icon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Automatic icon resizing for Cordova",
   "main": "index.js",
   "preferGlobal": true,
-  "directories": {
-    "bin": "./bin"
+  "files": [
+    "index.js",
+    "Contents.json"
+  ],
+  "bin": {
+    "cordova-icon": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/AlexDisler/cordova-icon.git"
+    "url": "git://github.com/simplifier-ag/cordova-icon.git"
   },
   "keywords": [
     "cordova",
@@ -22,16 +26,15 @@
   "author": "Alex Disler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexDisler/cordova-icon/issues"
+    "url": "https://github.com/simplifier-ag/cordova-icon/issues"
   },
-  "homepage": "https://github.com/AlexDisler/cordova-icon",
+  "homepage": "https://github.com/simplifier-ag/cordova-icon",
   "dependencies": {
-    "colors": "^0.6.2",
-    "fs-extra": "^0.30.0",
-    "gm": "^1.25.0",
-    "minimist": "^1.2.0",
-    "q": "^1.0.1",
-    "underscore": "^1.6.0",
-    "xml2js": "^0.6.0"
+    "colors": "^1.4.0",
+    "fs-extra": "^11.2.0",
+	"gm": "^1.25.0",
+    "minimist": "^1.2.8",
+    "underscore": "^1.13.6",
+    "xml2js": "^0.6.2"
   }
 }
