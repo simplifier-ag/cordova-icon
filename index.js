@@ -15,7 +15,7 @@ const SETTINGS = {
 };
 
 const FOLDERS = {
-	IOS_XCODE: '/Images.xcassets/AppIcon.appiconset/',
+	IOS_XCODE: '/Assets.xcassets/AppIcon.appiconset/',
 	IOS_OLD_XCODE: '/Resources/icons/',
 	ANDROID: 'platforms/android/app/src/main/res/',
 	OSX: '/Images.xcassets/AppIcon.appiconset/',
